@@ -1,6 +1,3 @@
-import requests
-import lxml.html as html
-
 URL_HOME_BANCO_NACION = 'https://www.bna.com.ar/Personas'
 XPATH_NACION = '//table[@class="table cotizacion"]/tbody/tr[1]/td[not(@class)]/text()'
 
@@ -8,22 +5,22 @@ URL_TIENDA_DOLAR = 'https://api.tiendadolar.com.ar/api/v2/price/coins'
 
 URL_BUENBIT = 'https://be.buenbit.com/api/market/tickers/'
 
-def usd_scraper_banco_nacion(url:int, xpath:int):    
+def usd_scraper_banco_nacion():    
     """ Scrap on the banco nacion website
     on the indicated node
 
-    param str url banco nacion url
-    param str xpath node to scrap
-    
     returns dict with usd values
     """
+    import requests
+    import lxml.html as html
+    
     try:
-        response = requests.get(url)
+        response = requests.get('https://www.bna.com.ar/Personas')
         if response.status_code == 200:
             currency = response.content.decode('utf-8')
             parsed = html.fromstring(currency)
 
-            usd_price = parsed.xpath(xpath)
+            usd_price = parsed.xpath('//table[@class="table cotizacion"]/tbody/tr[1]/td[not(@class)]/text()')
             dict_usd = {
                 'usd_billete_compra':usd_price[0],'usd_billete_venta':usd_price[1],
             'usd_divisa_compra':usd_price[2],'usd_divisa_venta':usd_price[3]  
@@ -34,15 +31,15 @@ def usd_scraper_banco_nacion(url:int, xpath:int):
         print(ve)
 
 
-def dai_prices_tienda_dolar(url:str):
+def dai_prices_tienda_dolar():
     """get .json from url
-
-    param url str url of 'tienda dolar api'
-    
+   
     returns a dict
     """
+    import requests
+
     try:
-        response = requests.get(url)
+        response = requests.get('https://api.tiendadolar.com.ar/api/v2/price/coins')
         if response.status_code == 200:
             currency = response.json()
             currency = currency[0]
@@ -52,15 +49,15 @@ def dai_prices_tienda_dolar(url:str):
         print(ve)
 
 
-def dai_prices_buenbit(url:str):
+def dai_prices_buenbit():
     """get .json from url
 
-    param url str url of 'buenbit api'
-    
     returns a dict
     """
+    import requests
+
     try:
-        response = requests.get(url)
+        response = requests.get('https://be.buenbit.com/api/market/tickers/')
         if response.status_code == 200:
             currency = response.json()
             currency = currency['object']['daiars']
@@ -70,14 +67,24 @@ def dai_prices_buenbit(url:str):
         print(ve)
 
 
-def run():
-    dict_usd = usd_scraper_banco_nacion(URL_HOME_BANCO_NACION, XPATH_NACION)
-    print(dict_usd)
-    dict_usd = dai_prices_tienda_dolar(URL_TIENDA_DOLAR)
-    print(dict_usd)
-    usd_tuple = dai_prices_buenbit(URL_BUENBIT)
-    print(usd_tuple)
+def usd_mep_prices_iol():
+    import pandas as pd
 
+    bid_mep, ask_mep = pd.read_html("https://www.invertironline.com/mercado/cotizaciones/argentina/monedas",thousands=".", decimal=',')[0].iloc[2][1:3]
+    bid_ccl, ask_ccl = pd.read_html("https://www.invertironline.com/mercado/cotizaciones/argentina/monedas",thousands=".", decimal=',')[0].iloc[3][1:3]
+    
+    return bid_mep, ask_mep, bid_ccl, ask_ccl
+
+
+def run():
+    dict_usd = usd_scraper_banco_nacion()
+    print(dict_usd)
+    dict_usd = dai_prices_tienda_dolar()
+    print(dict_usd)
+    usd_tuple = dai_prices_buenbit()
+    print(usd_tuple)
+    usd_iol = usd_mep_prices_iol()
+    print(usd_iol)
 
 if __name__=='__main__':
     run()
