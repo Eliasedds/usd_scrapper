@@ -58,14 +58,17 @@ def usd_prices_buenbit(url:str):
 
     param url str url of 'buenbit api'
     
-    returns a dict
+    returns a tuple
     """
     try:
         response = requests.get(url)
         if response.status_code == 200:
             currency = response.json()
             currency = currency['object']['daiars']
-            return currency
+            bid = currency['purchase_price']
+            ask = currency['selling_price']
+            
+            return bid, ask
     except ValueError as ve:
         print(ve)
 
@@ -75,8 +78,8 @@ def run():
     # print(dict_usd)
     # dict_usd = usd_prices_tienda_dolar(URL_TIENDA_DOLAR)
     # print(dict_usd)
-    dict_usd = usd_prices_buenbit(URL_BUENBIT)
-    print(dict_usd)
+    usd_tuple = usd_prices_buenbit(URL_BUENBIT)
+    print(usd_tuple)
 
 
 if __name__=='__main__':
