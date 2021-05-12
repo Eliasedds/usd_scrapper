@@ -4,7 +4,9 @@ import lxml.html as html
 URL_HOME_BANCO_NACION = 'https://www.bna.com.ar/Personas'
 XPATH_NACION = '//table[@class="table cotizacion"]/tbody/tr[1]/td[not(@class)]/text()'
 
-URL_BUENBIT = 'https://api.tiendadolar.com.ar/api/v2/price/coins'
+URL_TIENDA_DOLAR = 'https://api.tiendadolar.com.ar/api/v2/price/coins'
+
+URL_BUENBIT = 'https://be.buenbit.com/api/market/tickers/'
 
 def usd_scraper_banco_nacion(url:int, xpath:int):    
     """ Scrap on the banco nacion website
@@ -35,7 +37,7 @@ def usd_scraper_banco_nacion(url:int, xpath:int):
 def usd_prices_tienda_dolar(url:str):
     """get .json from url
 
-    param url str url of 'tienda dolar'
+    param url str url of 'tienda dolar api'
     
     returns a dict
     """
@@ -50,11 +52,32 @@ def usd_prices_tienda_dolar(url:str):
     except ValueError as ve:
         print(ve)
 
+
+def usd_prices_buenbit(url:str):
+    """get .json from url
+
+    param url str url of 'buenbit api'
+    
+    returns a dict
+    """
+    try:
+        response = requests.get(url)
+        if response.status_code == 200:
+            currency = response.json()
+            currency = currency['object']['daiars']
+            return currency
+    except ValueError as ve:
+        print(ve)
+
+
 def run():
     # dict_usd = usd_scraper_banco_nacion(URL_HOME_BANCO_NACION, XPATH_NACION)
     # print(dict_usd)
-    dict_usd = usd_prices_tienda_dolar(URL_BUENBIT)
+    # dict_usd = usd_prices_tienda_dolar(URL_TIENDA_DOLAR)
+    # print(dict_usd)
+    dict_usd = usd_prices_buenbit(URL_BUENBIT)
     print(dict_usd)
+
 
 if __name__=='__main__':
     run()
