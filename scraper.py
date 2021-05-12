@@ -34,7 +34,7 @@ def usd_scraper_banco_nacion(url:int, xpath:int):
         print(ve)
 
 
-def usd_prices_tienda_dolar(url:str):
+def dai_prices_tienda_dolar(url:str):
     """get .json from url
 
     param url str url of 'tienda dolar api'
@@ -45,40 +45,37 @@ def usd_prices_tienda_dolar(url:str):
         response = requests.get(url)
         if response.status_code == 200:
             currency = response.json()
-            # currency = currency[0]
-            # buy_price = currency['buy']
+            currency = currency[0]
 
             return currency
     except ValueError as ve:
         print(ve)
 
 
-def usd_prices_buenbit(url:str):
+def dai_prices_buenbit(url:str):
     """get .json from url
 
     param url str url of 'buenbit api'
     
-    returns a tuple
+    returns a dict
     """
     try:
         response = requests.get(url)
         if response.status_code == 200:
             currency = response.json()
             currency = currency['object']['daiars']
-            bid = currency['purchase_price']
-            ask = currency['selling_price']
             
-            return bid, ask
+            return currency
     except ValueError as ve:
         print(ve)
 
 
 def run():
-    # dict_usd = usd_scraper_banco_nacion(URL_HOME_BANCO_NACION, XPATH_NACION)
-    # print(dict_usd)
-    # dict_usd = usd_prices_tienda_dolar(URL_TIENDA_DOLAR)
-    # print(dict_usd)
-    usd_tuple = usd_prices_buenbit(URL_BUENBIT)
+    dict_usd = usd_scraper_banco_nacion(URL_HOME_BANCO_NACION, XPATH_NACION)
+    print(dict_usd)
+    dict_usd = dai_prices_tienda_dolar(URL_TIENDA_DOLAR)
+    print(dict_usd)
+    usd_tuple = dai_prices_buenbit(URL_BUENBIT)
     print(usd_tuple)
 
 
