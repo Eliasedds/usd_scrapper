@@ -1,5 +1,5 @@
 def usd_scraper_banco_nacion():    
-    """ Scrap on the banco nacion website
+    """ Scrap on the 'banco nacion' website
     on the indicated node
 
     returns dict with usd values

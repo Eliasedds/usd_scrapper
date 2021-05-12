@@ -1,6 +1,6 @@
 from scraper import usd_scraper_banco_nacion, dai_prices_buenbit, dai_prices_tienda_dolar, usd_mep_prices_iol
 
-def nacion_converter_str_to_float(dictionary:dict):
+def nacion_converter_str_to_float(dictionary:dict): 
     """convert str to float
 
     param dictionary dict from func:usd_scraper_banco_nacion
