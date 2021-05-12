@@ -1,10 +1,3 @@
-URL_HOME_BANCO_NACION = 'https://www.bna.com.ar/Personas'
-XPATH_NACION = '//table[@class="table cotizacion"]/tbody/tr[1]/td[not(@class)]/text()'
-
-URL_TIENDA_DOLAR = 'https://api.tiendadolar.com.ar/api/v2/price/coins'
-
-URL_BUENBIT = 'https://be.buenbit.com/api/market/tickers/'
-
 def usd_scraper_banco_nacion():    
     """ Scrap on the banco nacion website
     on the indicated node
