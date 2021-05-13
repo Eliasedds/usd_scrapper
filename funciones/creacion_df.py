@@ -24,7 +24,7 @@ def normalizer():
     usd_dollars = usd_mep_prices_iol()
     bid_mep, ask_mep, bid_ccl, ask_ccl = usd_dollars
 
-    #getting data forn tienda dolar
+    #getting data from "Dolar Hoy"
     usd_blue = usd_blue_scraper()
     bid_blue, ask_blue = dolarhoy_converter_str_to_float(usd_blue)
     
@@ -44,12 +44,12 @@ def normalizer():
 
     #a dict with the normalized data
     dict_data = {
-        'dolar':['nacion_billete','nacion_divisa','solidario','mep_48','ccl_48','tiendadolar_dai','buenbit_dai'],
-        'bid':[nacion_billete_bid, nacion_billete_ask, np.nan, bid_mep, bid_ccl, tiendadolar_dai_bid, buenbit_dai_bid],
-        'ask':[nacion_divisa_bid, nacion_divisa_ask, np.nan, ask_mep, ask_ccl, tiendadolar_dai_ask, buenbit_dai_ask],
-        'last':[nacion_billete_bid, nacion_billete_ask, dolar_solidario , ask_mep, ask_ccl, tiendadolar_dai_ask, buenbit_dai_ask],
-        'time':[time, time, time, time, time, time, time],
-        'date':[today, today, today, today, today, today, today]
+        'dolar':['nacion_billete','nacion_divisa','solidario','dolar_blue','mep_48','ccl_48','tiendadolar_dai','buenbit_dai'],
+        'bid':[nacion_billete_bid, nacion_billete_ask, np.nan, bid_blue, bid_mep, bid_ccl, tiendadolar_dai_bid, buenbit_dai_bid],
+        'ask':[nacion_divisa_bid, nacion_divisa_ask, np.nan, ask_blue, ask_mep, ask_ccl, tiendadolar_dai_ask, buenbit_dai_ask],
+        'last':[nacion_billete_bid, nacion_billete_ask, dolar_solidario, ask_blue, ask_mep, ask_ccl, tiendadolar_dai_ask, buenbit_dai_ask],
+        'time':[time, time, time, time, time, time, time, time],
+        'date':[today, today, today, today, today, today, today, today]
     }
 
     return dict_data
