@@ -69,15 +69,38 @@ def usd_mep_prices_iol():
     return bid_mep, ask_mep, bid_ccl, ask_ccl
 
 
+def usd_blue_scraper():
+    """Scrap on "dolar hoy" website on indicated node
+
+    return a list
+    """
+    import requests
+    import lxml.html as html
+
+    try:
+        response = requests.get('https://www.dolarhoy.com/cotizaciondolarblue')
+        if response.status_code == 200:
+            currency = response.content.decode('utf-8')
+            parsed = html.fromstring(currency)
+
+            usd_price = parsed.xpath('//div[@class="tile is-child"]/div[@class="value"]/text()')
+            return usd_price
+            
+    except ValueError as ve:
+        print(ve)
+
 def run():
-    dict_usd = usd_scraper_banco_nacion()
-    print(dict_usd)
-    dict_usd = dai_prices_tienda_dolar()
-    print(dict_usd)
-    usd_tuple = dai_prices_buenbit()
-    print(usd_tuple)
-    usd_iol = usd_mep_prices_iol()
-    print(usd_iol)
+    # dict_usd = usd_scraper_banco_nacion()
+    # print(dict_usd)
+    # dict_usd = dai_prices_tienda_dolar()
+    # print(dict_usd)
+    # usd_tuple = dai_prices_buenbit()
+    # print(usd_tuple)
+    # usd_iol = usd_mep_prices_iol()
+    # print(usd_iol)
+    usd_blue = usd_blue_scraper()
+    print(usd_blue)
+
 
 if __name__=='__main__':
     run()

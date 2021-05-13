@@ -1,5 +1,3 @@
-from scraper import usd_scraper_banco_nacion, dai_prices_buenbit, dai_prices_tienda_dolar, usd_mep_prices_iol
-
 def nacion_converter_str_to_float(dictionary:dict): 
     """convert str to float
 
@@ -42,6 +40,17 @@ def dolartienda_datos(dictionary:dict):
     return bid, ask
 
 
+def dolarhoy_converter_str_to_float(data_list:list):
+    float_list = []
+    for element in data_list:
+        if '$' in element:
+            i = element.replace('$','')
+            x = float(i)
+            float_list.append(x)
+    
+    return float_list
+
+
 def run():
     #banco nacion
     lista = usd_scraper_banco_nacion()
@@ -57,6 +66,10 @@ def run():
     x = dai_prices_buenbit()
     x_1, x_2 = buenbit_converter_str_to_float(x)
     print(x_1, x_2)
+
+    usd_blue = usd_blue_scraper()
+    bid, ask = dolarhoy_converter_str_to_float(usd_blue)
+    print(bid, ask)
 
 
 if __name__=='__main__':
