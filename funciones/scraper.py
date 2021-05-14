@@ -63,10 +63,21 @@ def dai_prices_buenbit():
 def usd_mep_prices_iol():
     import pandas as pd
 
-    bid_mep, ask_mep = pd.read_html("https://www.invertironline.com/mercado/cotizaciones/argentina/monedas",thousands=".", decimal=',')[0].iloc[2][1:3]
-    bid_ccl, ask_ccl = pd.read_html("https://www.invertironline.com/mercado/cotizaciones/argentina/monedas",thousands=".", decimal=',')[0].iloc[3][1:3]
+    bid_mep, ask_mep = pd.read_html("https://www.invertironline.com/mercado/cotizaciones/argentina/monedas", attrs={'id':'cotizaciones'},thousands=".", decimal=',')[0].iloc[2][1:3]
+    bid_ccl, ask_ccl = pd.read_html("https://www.invertironline.com/mercado/cotizaciones/argentina/monedas", attrs={'id':'cotizaciones'}, thousands=".", decimal=',')[0].iloc[3][1:3]
     
     return bid_mep, ask_mep, bid_ccl, ask_ccl
+
+
+def last_price_iol():
+    import pandas as pd
+
+    data = pd.read_html('https://www.invertironline.com/mercado/cotizaciones/argentina/bonos/todos', attrs={'id':'cotizaciones'}, thousands='.', decimal=',')[0]
+    bono_pesos = data.loc[22][9]
+    bono_c = data.loc[23][9]
+    bono_d = data.loc[24][9]
+
+    return round(bono_pesos/bono_c, 4), round(bono_pesos/bono_d, 4)
 
 
 def usd_blue_scraper():
@@ -96,10 +107,12 @@ def run():
     # print(dict_usd)
     # usd_tuple = dai_prices_buenbit()
     # print(usd_tuple)
-    # usd_iol = usd_mep_prices_iol()
-    # print(usd_iol)
-    usd_blue = usd_blue_scraper()
-    print(usd_blue)
+    usd_iol = usd_mep_prices_iol()
+    print(usd_iol)
+    last_iol = last_price_iol()
+    print(last_iol)
+    # usd_blue = usd_blue_scraper()
+    # print(usd_blue)
 
 
 if __name__=='__main__':
