@@ -81,9 +81,9 @@ def last_price_iol():
     import pandas as pd
 
     data = pd.read_html('https://www.invertironline.com/mercado/cotizaciones/argentina/bonos/todos', attrs={'id':'cotizaciones'}, thousands='.', decimal=',')[0]
-    bono_pesos = data.loc[22][9]
-    bono_c = data.loc[23][9]
-    bono_d = data.loc[24][9]
+    bono_pesos = data.loc[22][1]
+    bono_c = data.loc[23][1]
+    bono_d = data.loc[24][1]
 
     return round(bono_pesos/bono_c, 4), round(bono_pesos/bono_d, 4)
 
