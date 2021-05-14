@@ -61,6 +61,10 @@ def dai_prices_buenbit():
 
 
 def usd_mep_prices_iol():
+    """get usd prices from IOL website
+
+    returns a tuple
+    """
     import pandas as pd
 
     bid_mep, ask_mep = pd.read_html("https://www.invertironline.com/mercado/cotizaciones/argentina/monedas", attrs={'id':'cotizaciones'},thousands=".", decimal=',')[0].iloc[2][1:3]
@@ -70,6 +74,10 @@ def usd_mep_prices_iol():
 
 
 def last_price_iol():
+    """get bond prices from IOL website
+
+    retunrs a tuple
+    """
     import pandas as pd
 
     data = pd.read_html('https://www.invertironline.com/mercado/cotizaciones/argentina/bonos/todos', attrs={'id':'cotizaciones'}, thousands='.', decimal=',')[0]
