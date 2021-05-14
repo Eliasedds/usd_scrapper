@@ -42,6 +42,7 @@ def run():
     {next(dolar_type).capitalize()} $ {next(last_price)}
     {next(dolar_type).capitalize()} $ {next(last_price)}
     {next(dolar_type).capitalize()} $ {next(last_price)}
+    {next(dolar_type).capitalize()} $ {next(last_price)}
     {next(dolar_type).capitalize()} $ {next(last_price)}""")
 
 
