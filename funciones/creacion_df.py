@@ -6,7 +6,7 @@ def normalizer():
 
     returns a dict 
     """
-    from .scraper import usd_scraper_banco_nacion, dai_prices_buenbit, dai_prices_tienda_dolar, usd_mep_prices_iol, usd_blue_scraper
+    from .scraper import usd_scraper_banco_nacion, dai_prices_buenbit, dai_prices_tienda_dolar, usd_mep_prices_iol, usd_blue_scraper, last_price_iol
     from .conversores import nacion_converter_str_to_float, buenbit_converter_str_to_float, dolartienda_datos, dolarhoy_converter_str_to_float
     from datetime import datetime as dt_dt
     from datetime import date as dt_date
@@ -23,6 +23,7 @@ def normalizer():
     #getting data from iol
     usd_dollars = usd_mep_prices_iol()
     bid_mep, ask_mep, bid_ccl, ask_ccl = usd_dollars
+    last_ccl, last_mep = last_price_iol()
 
     #getting data from "Dolar Hoy"
     usd_blue = usd_blue_scraper()
@@ -47,7 +48,7 @@ def normalizer():
         'dolar':['nacion_billete','nacion_divisa','solidario','dolar_blue','mep_48','ccl_48','tiendadolar_dai','buenbit_dai'],
         'bid':[nacion_billete_bid, nacion_billete_ask, np.nan, bid_blue, bid_mep, bid_ccl, tiendadolar_dai_bid, buenbit_dai_bid],
         'ask':[nacion_divisa_bid, nacion_divisa_ask, np.nan, ask_blue, ask_mep, ask_ccl, tiendadolar_dai_ask, buenbit_dai_ask],
-        'last':[nacion_billete_bid, nacion_billete_ask, dolar_solidario, ask_blue, ask_mep, ask_ccl, tiendadolar_dai_ask, buenbit_dai_ask],
+        'last':[nacion_billete_bid, nacion_billete_ask, dolar_solidario, ask_blue, last_mep, last_ccl, tiendadolar_dai_ask, buenbit_dai_ask],
         'time':[time, time, time, time, time, time, time, time],
         'date':[today, today, today, today, today, today, today, today]
     }
