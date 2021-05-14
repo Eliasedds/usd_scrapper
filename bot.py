@@ -21,11 +21,21 @@ def api_conection():
 
 
 def run():
+    #Connecting to Twitter API
     api = api_conection()
+    
+    # Create a dict with data from the current requests
     dict_data = normalizer()
+    df = df_creator(dict_data)
+    new_df = append_df(df)
+    print(new_df)
+
+    #Take created dict to get values of the keys 'dolar' and 'last
     list_dolar, list_last = dict_data['dolar'], dict_data['last']
     dolar_type = generator(list_dolar)
     last_price = generator_float(list_last)
+
+    #Creating tweet
     api.update_status(f"""{next(dolar_type).capitalize()} $ {next(last_price)}
     {next(dolar_type).capitalize()} $ {next(last_price)}
     {next(dolar_type).capitalize()} $ {next(last_price)}
@@ -37,7 +47,8 @@ def run():
 
 
 if __name__=='__main__':
-    schedule.every(3).minutes().do(run)
+    run()
+    schedule.every().hours.at(':20').until('17:22').do(run)
     while True:
         schedule.run_pending()
-        time.sleep(1)
+        time.sleep(1) 
