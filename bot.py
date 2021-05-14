@@ -48,7 +48,6 @@ def run():
 
 
 if __name__=='__main__':
-    run()
     schedule.every().hours.at(':20').until('17:22').do(run)
     while True:
         schedule.run_pending()
