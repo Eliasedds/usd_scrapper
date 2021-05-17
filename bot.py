@@ -33,6 +33,7 @@ def run():
     brecha_list = list(df['brecha_%'])
     list_dolar, list_last = dict_data['dolar'], dict_data['last']
     dolar_type = generator(list_dolar)
+    dolar_type_1 = generator(list_dolar) #create a new generator
     last_price = generator_float(list_last)
     brecha = generator_float(brecha_list)
 
@@ -49,14 +50,14 @@ def run():
     (1/2)""")
 
     api.update_status(f"""Brecha
-    {next(dolar_type).capitalize()} % {next(brecha)}
-    {next(dolar_type).capitalize()} % {next(brecha)}
-    {next(dolar_type).capitalize()} % {next(brecha)}
-    {next(dolar_type).capitalize()} % {next(brecha)}
-    {next(dolar_type).capitalize()} % {next(brecha)}
-    {next(dolar_type).capitalize()} % {next(brecha)}
-    {next(dolar_type).capitalize()} % {next(brecha)}
-    {next(dolar_type).capitalize()} % {next(brecha)}
+    {next(dolar_type_1).capitalize()} % {next(brecha)}
+    {next(dolar_type_1).capitalize()} % {next(brecha)}
+    {next(dolar_type_1).capitalize()} % {next(brecha)}
+    {next(dolar_type_1).capitalize()} % {next(brecha)}
+    {next(dolar_type_1).capitalize()} % {next(brecha)}
+    {next(dolar_type_1).capitalize()} % {next(brecha)}
+    {next(dolar_type_1).capitalize()} % {next(brecha)}
+    {next(dolar_type_1).capitalize()} % {next(brecha)}
     (2/2)""")
     
 
