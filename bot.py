@@ -37,23 +37,27 @@ def run():
     brecha = generator_float(brecha_list)
 
     #Creating tweet
-    api.update_status(f"""{next(dolar_type).capitalize()} $ {next(last_price)}
+    api.update_status(f"""
     {next(dolar_type).capitalize()} $ {next(last_price)}
     {next(dolar_type).capitalize()} $ {next(last_price)}
     {next(dolar_type).capitalize()} $ {next(last_price)}
     {next(dolar_type).capitalize()} $ {next(last_price)}
     {next(dolar_type).capitalize()} $ {next(last_price)}
     {next(dolar_type).capitalize()} $ {next(last_price)}
-    {next(dolar_type).capitalize()} $ {next(last_price)}""")
+    {next(dolar_type).capitalize()} $ {next(last_price)}
+    {next(dolar_type).capitalize()} $ {next(last_price)}
+    (1/2)""")
 
-    api.update_status(f"""{next(dolar_type).capitalize()} % {next(brecha)}
+    api.update_status(f"""
     {next(dolar_type).capitalize()} % {next(brecha)}
     {next(dolar_type).capitalize()} % {next(brecha)}
     {next(dolar_type).capitalize()} % {next(brecha)}
     {next(dolar_type).capitalize()} % {next(brecha)}
     {next(dolar_type).capitalize()} % {next(brecha)}
     {next(dolar_type).capitalize()} % {next(brecha)}
-    {next(dolar_type).capitalize()} % {next(brecha)}""")
+    {next(dolar_type).capitalize()} % {next(brecha)}
+    {next(dolar_type).capitalize()} % {next(brecha)}
+    (2/2)""")
     
 
 
