@@ -80,7 +80,7 @@ def last_price_iol():
     """
     import pandas as pd
 
-    data = pd.read_html('https://www.invertironline.com/mercado/cotizaciones/argentina/bonos/todos', attrs={'id':'cotizaciones'},thousands='.', decimal='.')[0]
+    data = pd.read_html('https://www.invertironline.com/mercado/cotizaciones/argentina/bonos/todos', attrs={'id':'cotizaciones'},thousands='.', decimal=',')[0]
     filtro = data['Símbolo'].isin(['AL30','AL30D','AL30C'])
     df = data[filtro].reset_index(drop=True)
     df = df.convert_dtypes().dtypes
