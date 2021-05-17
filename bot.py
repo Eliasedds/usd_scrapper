@@ -19,7 +19,6 @@ def api_conection():
     return api
 
 
-
 def run():
     #Connecting to Twitter API
     api = api_conection()
@@ -30,10 +29,12 @@ def run():
     new_df = append_df(df)
     print(new_df)
 
-    #Take created dict to get values of the keys 'dolar' and 'last
+    #Take created dict to get values of the keys 'dolar' and 'last'
+    brecha_list = list(df['brecha'])
     list_dolar, list_last = dict_data['dolar'], dict_data['last']
     dolar_type = generator(list_dolar)
     last_price = generator_float(list_last)
+    brecha = generator_float(brecha_list)
 
     #Creating tweet
     api.update_status(f"""{next(dolar_type).capitalize()} $ {next(last_price)}
@@ -45,10 +46,19 @@ def run():
     {next(dolar_type).capitalize()} $ {next(last_price)}
     {next(dolar_type).capitalize()} $ {next(last_price)}""")
 
+    api.update_status(f"""{next(dolar_type).capitalize()} % {next(brecha)}
+    {next(dolar_type).capitalize()} % {next(brecha)}
+    {next(dolar_type).capitalize()} % {next(brecha)}
+    {next(dolar_type).capitalize()} % {next(brecha)}
+    {next(dolar_type).capitalize()} % {next(brecha)}
+    {next(dolar_type).capitalize()} % {next(brecha)}
+    {next(dolar_type).capitalize()} % {next(brecha)}
+    {next(dolar_type).capitalize()} % {next(brecha)}""")
+    
 
 
-if __name__=='__main__':
-    schedule.every().hours.at(':20').until('17:22').do(run)
+if __name__=='__main__':   
+    schedule.every().hours.at(':21').until('17:23').do(run)
     while True:
         schedule.run_pending()
         time.sleep(1) 
