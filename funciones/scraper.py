@@ -80,12 +80,14 @@ def last_price_iol():
     """
     import pandas as pd
 
-    data = pd.read_html('https://www.invertironline.com/mercado/cotizaciones/argentina/bonos/todos', attrs={'id':'cotizaciones'}, thousands='.', decimal=',')[0]
-    bono_pesos = data.loc[23][1]
-    bono_c = data.loc[24][1]
-    bono_d = data.loc[25][1]
+    data = pd.read_html('https://www.invertironline.com/mercado/cotizaciones/argentina/bonos/todos', thousands='.', decimal='.')[0]
+    filtro = data['Símbolo'].isin(['AL30','AL30D','AL30C'])
+    df = data[filtro].reset_index(drop=True)
+    ars_bond = df.iloc[0][2]
+    c_bond = df.iloc[1][2]
+    d_bond = df.iloc[2][2]
 
-    return round(bono_pesos/bono_c, 4), round(bono_pesos/bono_d, 4)
+    return round(ars_bond/c_bond, 4), round(ars_bond/d_bond, 4)
 
 
 def usd_blue_scraper():
