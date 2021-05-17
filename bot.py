@@ -30,14 +30,14 @@ def run():
     print(new_df)
 
     #Take created dict to get values of the keys 'dolar' and 'last'
-    brecha_list = list(df['brecha'])
+    brecha_list = list(df['brecha_%'])
     list_dolar, list_last = dict_data['dolar'], dict_data['last']
     dolar_type = generator(list_dolar)
     last_price = generator_float(list_last)
     brecha = generator_float(brecha_list)
 
     #Creating tweet
-    api.update_status(f"""
+    api.update_status(f"""Último precio
     {next(dolar_type).capitalize()} $ {next(last_price)}
     {next(dolar_type).capitalize()} $ {next(last_price)}
     {next(dolar_type).capitalize()} $ {next(last_price)}
@@ -48,7 +48,7 @@ def run():
     {next(dolar_type).capitalize()} $ {next(last_price)}
     (1/2)""")
 
-    api.update_status(f"""
+    api.update_status(f"""Brecha
     {next(dolar_type).capitalize()} % {next(brecha)}
     {next(dolar_type).capitalize()} % {next(brecha)}
     {next(dolar_type).capitalize()} % {next(brecha)}
