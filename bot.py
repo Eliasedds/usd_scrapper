@@ -16,7 +16,12 @@ def api_conection():
     api = tweepy.API(auth, wait_on_rate_limit=True,
         wait_on_rate_limit_notify=True)
 
-    return api
+    try:
+        api.verify_credentials()
+        print("Authentication OK")
+        return api
+    except:
+        print("Error during authentication")
 
 
 def run():
