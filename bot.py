@@ -66,7 +66,8 @@ def run():
 
 
 if __name__=='__main__':   
-    schedule.every().hours.at(':21').until('17:23').do(run)
+    run()   
+    schedule.every(20).minutes.do(run)
     while True:
         schedule.run_pending()
         time.sleep(1) 
