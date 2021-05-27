@@ -18,7 +18,7 @@ def normalizer():
     nacion_billete_bid, nacion_billete_ask,nacion_divisa_bid, nacion_divisa_ask = nacion_converter_str_to_float(dolares_nacion)
 
     #getting "dolar solidario"
-    dolar_solidario = nacion_billete_ask * 1.65
+    dolar_solidario = round(nacion_billete_ask * 1.65, 2)
 
     #getting data from iol
     usd_dollars = usd_mep_prices_iol()
@@ -46,9 +46,9 @@ def normalizer():
     #a dict with the normalized data
     dict_data = {
         'dolar':['nacion_billete','nacion_divisa','solidario','dolar_blue','mep_48','ccl_48','tiendadolar_dai','buenbit_dai'],
-        'bid':[nacion_billete_bid, nacion_billete_ask, np.nan, bid_blue, bid_mep, bid_ccl, tiendadolar_dai_bid, buenbit_dai_bid],
-        'ask':[nacion_divisa_bid, nacion_divisa_ask, np.nan, ask_blue, ask_mep, ask_ccl, tiendadolar_dai_ask, buenbit_dai_ask],
-        'last':[nacion_billete_bid, nacion_billete_ask, dolar_solidario, ask_blue, last_mep, last_ccl, tiendadolar_dai_ask, buenbit_dai_ask],
+        'bid':[nacion_billete_bid, nacion_divisa_bid, np.nan, bid_blue, bid_mep, bid_ccl, tiendadolar_dai_bid, buenbit_dai_bid],
+        'ask':[nacion_billete_ask, nacion_divisa_ask, np.nan, ask_blue, ask_mep, ask_ccl, tiendadolar_dai_ask, buenbit_dai_ask],
+        'last':[nacion_billete_ask, nacion_divisa_ask, dolar_solidario, ask_blue, last_mep, last_ccl, tiendadolar_dai_ask, buenbit_dai_ask],
         'time':[time, time, time, time, time, time, time, time],
         'date':[today, today, today, today, today, today, today, today]
     }

@@ -51,8 +51,7 @@ def run():
     {next(dolar_type).capitalize()} $ {next(last_price)}
     {next(dolar_type).capitalize()} $ {next(last_price)}
     {next(dolar_type).capitalize()} $ {next(last_price)}
-    {next(dolar_type).capitalize()} $ {next(last_price)}
-    (1/2)""")
+    {next(dolar_type).capitalize()} $ {next(last_price)}""")
 
     api.update_status(f"""Brecha
     {next(dolar_type_1).capitalize()} % {next(brecha)}
@@ -62,8 +61,7 @@ def run():
     {next(dolar_type_1).capitalize()} % {next(brecha)}
     {next(dolar_type_1).capitalize()} % {next(brecha)}
     {next(dolar_type_1).capitalize()} % {next(brecha)}
-    {next(dolar_type_1).capitalize()} % {next(brecha)}
-    (2/2)""")
+    {next(dolar_type_1).capitalize()} % {next(brecha)}""")
     
 
 
