@@ -67,7 +67,7 @@ def run():
 
 if __name__=='__main__':   
     run()   
-    schedule.every(20).minutes.do(run)
+    schedule.every(30).minutes.do(run)
     while True:
         schedule.run_pending()
         time.sleep(1) 
